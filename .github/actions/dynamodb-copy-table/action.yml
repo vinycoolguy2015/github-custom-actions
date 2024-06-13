@@ -1,0 +1,16 @@
+name: 'Copy DynamoDB data'
+description: 'Copy DynamoDB data from one table to another'
+runs:
+    using: 'docker'
+    image: 'Dockerfile'
+inputs:
+  dynamodb_source_table:
+    description: 'Source DynamoDB table name.'
+    required: true
+  dynamodb_destination_table:
+    description: 'Destination DynamoDB table name.'
+    required: true
+  aws_region: 
+    description: 'The region of source and destination dynamodb tables.'
+    required: false
+    default: 'us-east-1'

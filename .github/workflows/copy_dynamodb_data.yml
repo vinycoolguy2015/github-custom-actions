@@ -1,0 +1,20 @@
+name: Copy DynamoDB data
+on:
+  push:
+    branches:
+      - main
+jobs:
+  copy:
+    runs-on: ubuntu-latest
+    steps:
+      - name: Get code
+        uses: actions/checkout@v3
+      - name: Copy DynamoDB data
+        uses: ./.github/actions/dynamodb-copy-table
+        env:
+          AWS_ACCESS_KEY_ID: ${{ secrets.AWS_ACCESS_KEY_ID }}
+          AWS_SECRET_ACCESS_KEY: ${{ secrets.AWS_SECRET_ACCESS_KEY }}
+        with:
+          dynamodb_source_table: logfile
+          dynamodb_destination_table: logfile_backup
+          # bucket-region: us-east-2
